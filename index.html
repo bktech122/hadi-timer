@@ -2,6 +2,10 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
+
+    <!-- 🔴 FULL SCREEN FIX -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>হাদি হত্যার বিচারবহির্ভূত সময়</title>
 
     <style>
@@ -12,26 +16,36 @@
             font-family: "Segoe UI", sans-serif;
         }
 
-        body {
+        html, body {
+            width: 100vw;
+            height: 100vh;
             background-color: #000;
             color: #fff;
-            min-height: 100vh;
+        }
+
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .container {
-            text-align: center;
-            max-width: 650px;
+            width: 100%;
+            height: 100%;
+            max-width: 700px;
             padding: 25px;
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .top-image img {
             width: 100%;
             max-width: 360px;
             border-radius: 12px;
-            margin-bottom: 30px;
+            margin: 0 auto 30px auto;
             box-shadow: 0 0 30px rgba(255,0,0,0.5);
         }
 
@@ -74,51 +88,33 @@
 
 <div class="container">
 
-    <!-- Image -->
     <div class="top-image">
         <img src="https://a.top4top.io/p_3670rto8b0.jpg" alt="Osman Hadi">
     </div>
 
-    <!-- Title -->
     <h1>
         আমরা শহীদ ওসমান বিন হাদীর হত্যার<br>
         বিচারবহির্ভূত সময় পার করছি
     </h1>
 
-    <!-- Death Time Info -->
     <div class="death-info">
         মৃত্যুর সময় শুরু:<br>
         <strong>১৮ ডিসেম্বর ২০২৫, রাত ৯:৪৫ (বাংলাদেশ সময়)</strong>
     </div>
 
-    <!-- Live Timer -->
     <div class="timer" id="timer">
         সময় গণনা শুরু হচ্ছে...
     </div>
 
     <footer>
         এই সময়টি মৃত্যুর মুহূর্ত থেকেই প্রতি সেকেন্ডে বৃদ্ধি পাচ্ছে<br>
-⚡⚡ Powered by BONEAMIN
+        ⚡⚡ Powered by BONEAMIN
     </footer>
 
 </div>
 
 <script>
-    /*
-      🔴 ওসমান হাদীর মৃত্যুর সঠিক সময়
-      📅 তারিখ: ১৮ ডিসেম্বর ২০২৫
-      ⏰ সময়: রাত ৯:৪৫
-      🌍 টাইমজোন: বাংলাদেশ (UTC +06:00)
-    */
-
-    const deathTime = new Date(
-        2025, // Year
-        11,   // Month (ডিসেম্বর = 11)
-        18,   // Date
-        21,   // Hour (রাত ৯টা)
-        45,   // Minute
-        0     // Second
-    ).getTime();
+    const deathTime = new Date(2025, 11, 18, 21, 45, 0).getTime();
 
     function updateTimer() {
         const now = new Date().getTime();
