@@ -1,152 +1,207 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বিচারবিহীন সময়</title>
 
-    <!-- 🔴 FULL SCREEN FIX -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
 
-    <title>হাদি হত্যার বিচারবহির্ভূত সময়</title>
+html,body{
+    width:100%;
+    height:100%;
+    background:#000;
+    color:#fff;
+    overflow:hidden;
+}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", sans-serif;
-        }
+body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-        html, body {
-            width: 100vw;
-            height: 100vh;
-            background-color: #000;
-            color: #fff;
-        }
+/* 🔴 BLOOD DROPS OVER SCREEN */
+.blood-layer{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.drop{
+    position:absolute;
+    top:-60px;
+    width:6px;
+    height:22px;
+    background:rgba(160,0,0,0.85);
+    border-radius:50%;
+    filter:blur(0.3px);
+    animation:fall linear infinite;
+}
 
-        .container {
-            width: 100%;
-            height: 100%;
-            max-width: 700px;
-            padding: 25px;
-            text-align: center;
+@keyframes fall{
+    0%{transform:translateY(0);opacity:0.9;}
+    100%{transform:translateY(130vh);opacity:0;}
+}
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.container{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+    padding:25px;
+    text-align:center;
+}
 
-        .top-image img {
-            width: 100%;
-            max-width: 360px;
-            border-radius: 12px;
-            margin: 0 auto 30px auto;
-            box-shadow: 0 0 30px rgba(255,0,0,0.5);
-        }
+.top-image img{
+    width:100%;
+    max-width:360px;
+    border-radius:12px;
+    margin-bottom:25px;
+    box-shadow:0 0 30px rgba(255,0,0,0.4);
+}
 
-        h1 {
-            color: #ff2d2d;
-            font-size: 22px;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
+h1{
+    color:#ff2d2d;
+    font-size:22px;
+    line-height:1.5;
+    margin-bottom:20px;
+}
 
-        .death-info {
-            font-size: 14px;
-            color: #bbb;
-            margin-bottom: 15px;
-        }
+.death-info{
+    font-size:14px;
+    color:#bbb;
+    margin-bottom:15px;
+}
 
-        .timer {
-            font-size: 21px;
-            font-weight: bold;
-            background: rgba(255,255,255,0.06);
-            padding: 22px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
+.timer{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:12px;
+    padding:20px;
+    font-size:16px;
+}
 
-        .timer span {
-            display: block;
-            margin: 7px 0;
-        }
+.timer span{
+    display:block;
+    margin:6px 0;
+}
 
-        footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #888;
-        }
-    </style>
+.highlight{
+    margin-top:12px;
+    color:#ff2d2d;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.4;}
+}
+
+footer{
+    margin-top:18px;
+    font-size:12px;
+    color:#888;
+}
+</style>
 </head>
 
 <body>
 
+<!-- 🩸 BLOOD DROPS -->
+<div class="blood-layer" id="bloodLayer"></div>
+
 <div class="container">
 
-    <div class="top-image">
-        <img src="https://a.top4top.io/p_3670rto8b0.jpg" alt="Osman Hadi">
-    </div>
+<div class="top-image">
+<img src="https://a.top4top.io/p_3670rto8b0.jpg" alt="Osman Hadi">
+</div>
 
-    <h1>
-        আমরা শহীদ ওসমান বিন হাদীর হত্যার<br>
-        বিচারবহির্ভূত সময় পার করছি
-    </h1>
+<h1>
+আমরা শহীদ ওসমান বিন হাদীর হত্যার<br>
+বিচারবিহীন সময় পার করছি
+</h1>
 
-    <div class="death-info">
-        মৃত্যুর সময় শুরু:<br>
-        <strong>১৮ ডিসেম্বর ২০২৫, রাত ৯:৪৫ (বাংলাদেশ সময়)</strong>
-    </div>
+<div class="death-info">
+মৃত্যুর সময় শুরু:<br>
+<strong>১৮ ডিসেম্বর ২০২৫, রাত ৯:৪৫</strong>
+</div>
 
-    <div class="timer" id="timer">
-        সময় গণনা শুরু হচ্ছে...
-    </div>
+<div class="timer" id="timer">সময় গণনা হচ্ছে...</div>
 
-    <footer>
-        এই সময়টি মৃত্যুর মুহূর্ত থেকেই প্রতি সেকেন্ডে বৃদ্ধি পাচ্ছে<br>
-        ⚡⚡ Powered by BONEAMIN
-    </footer>
+<footer>
+এই সময় প্রতি সেকেন্ডে বেড়ে চলেছে<br>
+⚡ Powered by BONEAMIN
+</footer>
 
 </div>
 
+<!-- 🎵 BACKGROUND AUDIO (AUTOPLAY) -->
+<audio id="bgAudio" autoplay loop>
+    <source src="https://j.top4top.io/m_36734yvtm0.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-    const deathTime = new Date(2025, 11, 18, 21, 45, 0).getTime();
+/* 🩸 Generate Blood Drops */
+const bloodLayer = document.getElementById("bloodLayer");
+for(let i=0;i<28;i++){
+    const d = document.createElement("div");
+    d.className = "drop";
+    d.style.left = Math.random()*100 + "vw";
+    d.style.animationDuration = (7 + Math.random()*8) + "s";
+    d.style.animationDelay = Math.random()*10 + "s";
+    bloodLayer.appendChild(d);
+}
 
-    function updateTimer() {
-        const now = new Date().getTime();
-        let diff = now - deathTime;
+/* ⏳ Time Calculation */
+const startDate = new Date(2025,11,18,21,45,0);
 
-        if (diff < 0) {
-            document.getElementById("timer").innerHTML =
-                "মৃত্যুর সময় এখনও শুরু হয়নি";
-            return;
-        }
+function updateTimer(){
+    const now = new Date();
 
-        const totalSeconds = Math.floor(diff / 1000);
-        const seconds = totalSeconds % 60;
-        const totalMinutes = Math.floor(totalSeconds / 60);
-        const minutes = totalMinutes % 60;
-        const totalHours = Math.floor(totalMinutes / 60);
-        const hours = totalHours % 24;
-        const days = Math.floor(totalHours / 24);
+    let y = now.getFullYear() - startDate.getFullYear();
+    let m = now.getMonth() - startDate.getMonth();
+    let d = now.getDate() - startDate.getDate();
+    let h = now.getHours() - startDate.getHours();
+    let min = now.getMinutes() - startDate.getMinutes();
+    let s = now.getSeconds() - startDate.getSeconds();
 
-        document.getElementById("timer").innerHTML = `
-            <span>⏳ ${days} দিন</span>
-            <span>⏳ ${hours} ঘণ্টা</span>
-            <span>⏳ ${minutes} মিনিট</span>
-            <span>⏳ ${seconds} সেকেন্ড</span>
-            <span style="margin-top:12px;color:#ff2d2d;">
-                বিচার ছাড়াই সময় পার হচ্ছে…
-            </span>
-        `;
+    if(s < 0){ s += 60; min--; }
+    if(min < 0){ min += 60; h--; }
+    if(h < 0){ h += 24; d--; }
+    if(d < 0){
+        d += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        m--;
     }
+    if(m < 0){ m += 12; y--; }
 
-    updateTimer();
-    setInterval(updateTimer, 1000);
+    let html = "";
+    if(y > 0) html += `<span>${y} বছর</span>`;
+    if(m > 0) html += `<span>${m} মাস</span>`;
+    if(d > 0) html += `<span>${d} দিন</span>`;
+    if(h > 0) html += `<span>${h} ঘণ্টা</span>`;
+    if(min > 0) html += `<span>${min} মিনিট</span>`;
+    html += `<span>${s} সেকেন্ড</span>`;
+    html += `<span class="highlight">বিচার ছাড়াই সময় পার হচ্ছে…</span>`;
+
+    document.getElementById("timer").innerHTML = html;
+}
+
+updateTimer();
+setInterval(updateTimer,1000);
+
+/* 🎵 Autoplay Fallback for Mobile */
+const audio = document.getElementById("bgAudio");
+audio.volume = 0.12;
+document.addEventListener("click",()=>{
+    if(audio.paused) audio.play();
+});
 </script>
 
 </body>
